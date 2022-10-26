@@ -2,7 +2,7 @@ from math import ceil               # Ceil is used to calculate the number of li
 # definition of the geometrical parameters. All dimentions are expressed in mm
 Number_Slides = 1                  # number of slides to coat at once
 Center_area = (100,125)             # Coordonates of the center of the sample
-Tool_offset=(0,50)
+Tool_offset=(0,50,0)
 Orientation_Slide = 0              # direction of the slide's major dimention. 0 for X, 1 for Y
 Dimention_Slide = (75.5,25.5)       # dimention of one slide, major dimention first
 Positioning_uncertainty = 2         # imprecision on the slides positioning
@@ -10,7 +10,7 @@ Positioning_uncertainty = 2         # imprecision on the slides positioning
 # definition of the spraying parameter geometry
 Spray_diameter = 23                 # diameter of the spray
 Hatch = 12                         # distance between two spraying lines
-Spray_height = 100                   # distance between the sample and the spray head
+Spray_height = 100 + Tool_offset[2]  # distance between the sample and the spray head
 Offest_Purging = 25             # distance from the coating area to begin spaying
 Number_layers = 40                 # Number of layers (ie scans)
 Temperature_stage = 100            # hotplate temperature in degree
@@ -25,6 +25,7 @@ File_handler = open(f'{file_Path}{File_name}',"w")
 File_handler.write("(This Gcode is automaticaly generated to control the movement of a spray coater)\n\n")
 
 # Declaration of variables
+Spray_height = Spray_height + Tool_offset[2]
 Scan_direction = 1-Orientation_Slide    # direction of the scan 0 for X, 1 for Y. The first scan takes place in the samples small direction
 
 # Calculate the distance between the border of the spraying zone and the first line of spray  
@@ -47,7 +48,7 @@ Number_line [1] = ceil(((Coating_zone_dimention[0]-Offset_first_line)/Hatch)-Off
 # Remove the space between the border and the first line, divide the rest by hatch, remove the margin on top, rounds to the sup and adds one
 
 # Definition of the line wrighting functions
-def print_G1_line (X,Y,Z=-1,E=-1,F=Feedrate):                   # Wright a movement line
+def print_G1_line (X,Y,Z=-1,E=-1,F=Feedrate):                   # write a movement line
     if(Z==-1 & E==-1):
         File_handler.write(f'G1 X{X} Y{Y}\n')
     elif(Z==-1):
