@@ -1,12 +1,17 @@
-int ledPin = 9;      // LED connected to digital pin 9
-
-
-
+#include <Servo.h>
+Servo SprayHead;
+int SensePin=10;
+int ServoPin=9;
+int ServoState=0;
 void setup() {
-  pinMode(ledPin, OUTPUT);  // sets the pin as output
+SprayHead.attach(ServoPin);
+pinMode(SensePin,INPUT);
+SprayHead.write(65);
 }
 
 void loop() {
- 
-  analogWrite(ledPin, 100); // analogRead values go from 0 to 1023, analogWrite values from 0 to 255
+if(digitalRead(SensePin)==HIGH )
+    SprayHead.write(20);
+else
+      SprayHead.write(65);
 }
