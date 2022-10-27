@@ -2,7 +2,7 @@
 Servo SprayHead;
 int SensePin=10;
 int ServoPin=9;
-int ServoState=0;
+
 void setup() {
 SprayHead.attach(ServoPin);
 pinMode(SensePin,INPUT);
