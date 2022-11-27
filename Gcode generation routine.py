@@ -10,7 +10,7 @@ Positioning_uncertainty = 2         # imprecision on the slides positioning
 # definition of the spraying parameter geometry
 Spray_diameter = 23                 # diameter of the spray
 Hatch = 12                         # distance between two spraying lines
-Spray_height = 100 + Tool_offset[2]  # distance between the sample and the spray head
+Spray_height = 100                # distance between the sample and the spray head
 Offest_Purging = 25             # distance from the coating area to begin spaying
 Number_layers = 40                 # Number of layers (ie scans)
 Temperature_stage = 100            # hotplate temperature in degree
